@@ -1,0 +1,5 @@
+package space3;
+
+public class Client2 implements Runnable  {
+
+}

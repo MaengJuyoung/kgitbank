@@ -1,0 +1,14 @@
+package space4;
+
+public class EX1 {
+	public static void main(String[] args) {
+		// 통신의 기본 : 1대1
+		
+		// ※ TCP의 단점 - 자원이 많이 소모됨
+		
+		// 2) UDP(User Datagram Protocol)
+		//    - 상대방이 받든 말든 데이터를 전송하는 방식
+		//    - 데이터의 신뢰도에 대한 보장이 안되어 있음
+		//    - TCP보다 빠름( + 컴퓨터의 자원을 덜 소모함 )
+	}
+}

@@ -1,0 +1,46 @@
+package space;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class EX3 {
+	public static Connection getConn() {
+		try {
+			String url = "jdbc:oracle:thin:@localhost:1521:XE";
+			String id = "HR";
+			String pw = "1234";
+			return DriverManager.getConnection(url, id, pw);
+		} catch (SQLException e) {
+			throw e;
+		}
+	}
+	public static void main(String[] args) {
+		Connection conn = null;
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			
+			String query = "SELECT * FROM countries";
+			PreparedStatement psmt = conn.prepareStatement(query);
+			ResultSet rs = psmt.executeQuery();
+			while (rs.next()) {
+				System.out.printf("%s %s %d\n",
+						rs.getString("country_id"),
+						rs.getString("country_name"),
+						rs.getInt("region_id"));
+			}
+		} catch (ClassNotFoundException e) {
+			System.out.println(e);
+		} catch (SQLException e) {
+			System.out.println(e);
+		} finally {
+			try {
+				if (conn != null) conn.close();
+			} catch (SQLException f) {
+				System.out.println(f);
+			}
+		}
+	}
+}

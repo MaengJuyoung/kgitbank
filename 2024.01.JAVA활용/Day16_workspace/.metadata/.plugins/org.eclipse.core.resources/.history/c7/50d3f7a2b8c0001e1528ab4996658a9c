@@ -1,0 +1,29 @@
+package space;
+
+public class EX1 {
+	/*
+	    // DB와 연동하기 -> CRUD를 이 내부에서 구현해줘야 함
+		// ※ JDBC API
+		// 1) 같은 컴퓨터에 Oracle DB와 앱을 굴릴 경우
+		//   설치한 Oracle DB에 동봉되어 있음
+		// -> 설치된 Oracle DB의 깊숙한 곳에 있음(dbhomeXE 폴더 내 jdbc폴더 내에 있음)
+		// 2) 서로 다른 컴퓨터에서 DB와 앱을 운용할 경우
+		//   JDBC API를 다운받아서 적용시켜줘야 함
+		// -> 구글에서 JDBC Download로 검색해, 알맞은 버전을 골라서 쓰면 됨(ojdbc8.jar/ojdbc11.jar)
+		// ※ 호환이 안되거나 문제가 생기면 검색으로 최신 jdbc를 받아 교체해보는게 좋음
+		
+		// ※ 만들어진 프로젝트일 경우, Build Path에 접근하여 Libaries의 Classpath를 클릭하고
+		//   Add External Jars를 클릭해여 추가를 함
+	*/
+	public static void main(String[] args) {
+		try {
+			// Class.forName("클래스명") : 필요한 구성요소가 로딩되었는지를 점검함
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			String url = "jdbc:oracle:thin:@localhost:1521:XE";
+			String id = "HR";
+			String pw = "1234";
+		} catch (ClassNotFoundException e) {
+			System.out.println(e);
+		}
+	}
+}

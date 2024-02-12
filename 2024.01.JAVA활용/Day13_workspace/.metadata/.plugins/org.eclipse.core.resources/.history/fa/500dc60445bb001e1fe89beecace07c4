@@ -1,0 +1,21 @@
+package space1;
+
+class Location {
+	private int x;
+	private int y;
+	public Location(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+	public int getX() { return x; }
+	public int getY() { return x; }
+	public boolean compareTo(Location other) {
+		if 
+	}
+}
+
+public class TEST1 {
+	public static void main(String[] args) {
+		
+	}
+}

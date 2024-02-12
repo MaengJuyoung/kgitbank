@@ -1,0 +1,10 @@
+package space3;
+
+public class Client2 implements Runnable  {
+	private InetAddress dest;
+	private int port;
+	public Client1(InetAddress dest, int port) {
+		this.dest = dest;
+		this.port = port;
+	}
+}

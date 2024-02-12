@@ -1,0 +1,15 @@
+package space3;
+
+public class RelayServer implements Runnable {
+	private int port;
+	public RelayServer(int port) {
+		this.port = port;
+	}
+	public void run() {
+		try (ServerSocket listener = new ServerSocket()){
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
+}

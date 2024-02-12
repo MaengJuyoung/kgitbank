@@ -1,0 +1,40 @@
+package runSpace;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+
+class CopyThread implements Runnable {
+	private String fileName;
+	public CopyThread(String fileName) {
+		this.fileName = fileName;
+	}
+	public void run() {
+		try {
+			FileInputStream fis = new FileInputStream("file.pdf");
+			FileOutputStream fos = new FileOutputStream(fileName);
+			while (true) {
+				int data = fis.read();
+				if (data != -1) fos.write((byte)data);
+				else break;
+			}
+			fis.close();
+			fos.close();
+		} catch(Exception e) {
+			System.out.println(e);
+		}
+	}
+}
+
+public class EX3 {
+	public static void main(String[] args) {
+		// 1) 쓰레드를 쓰더라도 순서는 지켜줘야 함
+		// 2) 동시 작업시에는 서로 영향을 주고 받는지를 점검해야 함
+		for (int i = 1; i <= 9; i += 1) {
+			CopyThread ct = new CopyThread("file" + i +".pdf");
+		}
+		
+		CopyThread ct2 = new CopyThread("file2.pdf");
+		ct1.run();
+		ct2.run();
+	}
+}

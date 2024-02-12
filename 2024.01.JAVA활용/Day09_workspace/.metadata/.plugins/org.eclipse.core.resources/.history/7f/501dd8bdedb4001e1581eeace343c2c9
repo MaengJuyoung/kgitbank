@@ -1,0 +1,51 @@
+package objectStream;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
+import java.io.Serializable;
+
+class Sample implements Serializable {
+	// serialVersionUID
+	// - 파일로 변환할 때 호환성을 위해 준비하는 변수
+	// - 정수값은 버전관리요령에 따라 숫자를 부여하게 됨
+	public static final long serialVersionUID = 100;
+	public String name;
+	public int age;
+	public Sample(String name, int age) {
+		this.name = name;
+		this.age = age;
+	}
+}
+
+public class EX1 {
+	public static void main(String[] args) {
+		// Object Stream : 객체를 파일로 만들고, 다시 읽어들여 객체를 만들기 위한 스트림
+		Sample sam1 = new Sample("고길동", 14);
+		Sample sam2 = new Sample("김길동", 16);
+		// Object Stream의 결과물은 관례로써, 확장자를 .ser로 설정함
+		try (OutputStream fos = new FileOutputStream("OutputFolder/sam.ser")){
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			oos.writeObject(sam1);
+			oos.writeObject(sam2);
+		} catch (IOException e) {
+			System.out.println(e);
+		}
+		sam1 = null;
+		sam2 = null;
+		try (InputStream fis = new FileInputStream("OutputFolder/sam.ser")){
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			sam1 = (Sample)ois.readObject();
+			System.out.println(sam1 + " " + sam1.name + " " + sam1.age);
+			// sam2 = (Sample)ois.readObject();
+		} catch (IOException e) {
+			System.out.println(e);
+		} catch (ClassNotFoundException e) {
+			System.out.println(e);
+		}
+	}
+}

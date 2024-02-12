@@ -1,0 +1,32 @@
+package space;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class EX2 {
+	public static void main(String[] args) {
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			String url = "jdbc:oracle:thin:@localhost:1521:XE";
+			String id = "HR";
+			String pw = "1234";
+			try (Connection conn = DriverManager.getConnection(url, id, pw)){
+				// excuteQuery() : ResultSet 객체가 나옴 -> 필요한 레코드를 확인하고 읽는 방식
+				PreparedStatement psmt = conn.prepareStatement("SELECT * FROM regions");
+				// ResultSet : 복사된 레코드가 열과 행으로 구분되어 나오는 객체
+				ResultSet rs = psmt.executeQuery();
+				// getString(), getInt()
+				System.out.println(rs);
+				
+				
+			} catch(SQLException e) {
+				System.out.println(e);
+			}
+		} catch (ClassNotFoundException e) {
+			System.out.println(e);
+		}
+	}
+}

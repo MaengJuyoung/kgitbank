@@ -1,0 +1,35 @@
+package space4;
+
+import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.SocketException;
+
+public class UDPClient implements Runnable {
+	private int port;			// 목적지가 개방한 port
+	private InetAddress dest;	// 목적지
+	public UDPClient(InetAddress dest, int port) {
+		this.port = port;
+		this.dest = dest;
+	}
+	public void run() {
+		try {
+			// 보내는 측은 포트를 미리 지정해서 개방하진 않음
+			DatagramSocket entrance = new DatagramSocket();
+			// 1) Buffer준비 - 직접 읽어들여 조립하게 됨
+			byte[] buffer = new byte[1024];
+			// 2) DatagramPacket 조립
+			//   ※ 패킷에 목적지와 포트번호를 반영함
+			DatagramPacket data = new DatagramPacket(buffer, buffer.length, dest, port);
+			// 3) 보냄 - send() 메서드를 이용함
+			entrance.send(data);
+		} catch (SocketException e) {
+			System.out.println(e);
+			System.out.println("포트가 중복됨!");
+		} catch (IOException e) {
+			System.out.println(e);
+			System.out.println("패킷 송신중에 문제발생!");
+		}
+	}
+}

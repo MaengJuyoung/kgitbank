@@ -1,0 +1,42 @@
+package space;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class TEST1 {
+	public static void main(String[] args) {
+		Connection conn = null;
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			String url = "jdbc:oracle:thin:@localhost:1521:XE";
+			String id = "HR";
+			String pw = "1234";
+			conn = DriverManager.getConnection(url, id, pw);
+			// 실습 - DB의 conturies 테이블의 모든 레코드를 가져와서 출력하세요.
+			//       칼럼은 country_id, country_name, region_id 순으로 출력합니다.
+			String query = "SELECT * FROM conturies";
+			PreparedStatement psmt = conn.prepareStatement(query);
+			ResultSet rs = psmt.executeQuery();
+			while (rs.next()) {
+				System.out.printf("%s %s %d\n",
+						rs.getString("country_id"),
+						rs.getString("country_name"),
+						rs.getInt("region_id"));
+			}
+		} catch (ClassNotFoundException e) {
+			System.out.println(e);
+		} catch (SQLException e) {
+			System.out.println(e);
+		} finally {
+			// try with resource가 아닐 경우 별도 처리를 해줘야 함
+			try {
+				if (conn != null) conn.close();
+			} catch (SQLException f) {
+				System.out.println(f);
+			}
+		}
+	}
+}

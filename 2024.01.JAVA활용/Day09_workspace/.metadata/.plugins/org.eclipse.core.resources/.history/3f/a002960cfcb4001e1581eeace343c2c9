@@ -1,0 +1,44 @@
+package objectStream;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
+class Super implements Serializable {
+	public static final long serialVersionUID = 100;
+	public int x;
+	public Super() { x = 0; }
+	public Super(int x) { this.x = x; }
+}
+class Child extends Super {
+	public int y;
+	public Child() { super(); y = 0; }
+	public Child(int x, int y) { super(x); this.y = y; }
+}
+
+public class EX2 {
+	public static void main(String[] args) {
+		try {
+			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("OutputFolder/test.ser"));
+			oos.writeObject(new Child(10, 20));
+			oos.close();
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("OutputFolder/test.ser"));
+			Child o = (Child)ois.readObject();
+			ois.close();
+			System.out.println(o.x + " " + o.y);
+		} catch(Exception e) {
+			System.out.println(e);
+		}
+		// 직렬화/역직렬화시 주의사항
+		// - 1) 반드시 부모클래스에서 인터페이스를 구현해야 함
+		//   -> 자식클래스에서 구현해버리면....자식클래스의 필드만 직렬화/역직렬화가 됨
+		//   -> 그래도 했을 경우, 부모클래스의 생성자에 기본생성자가 없으면 작동안함
+		//   ※ 선택사항으로 자식클래의 UID를 추가함 - 자식클래스 관리용
+		
+		// - 2) UID가 같은 상태에서 필드에 변화가 생기면?
+		//   -> 절대 권장하지 않음
+		//   -> 필드를 어거지로 맞추면 되긴 되기도 함
+	}
+}

@@ -1,0 +1,49 @@
+package space3;
+
+import java.io.BufferedOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.util.Scanner;
+
+//클라이언트(Client or Guest)
+public class SampleClient implements Runnable {
+	private InetAddress destination;
+	private int port;
+	public SampleClient(InetAddress dest, int port) {
+		this.destination = dest;
+		this.port = port;
+	}
+	public void run() {
+		try {
+			Socket link = new Socket(destination, port);
+			System.out.println("Client : Connected!");
+			OutputStream toServer = link.getOutputStream();
+			// 이 스트림들은 목적에 맞게 DataStream 또는 Reader/Writer로 랩핑함
+			// -> Buffer를 꼭 적용해서 래핑해줘야 함
+			toServer = new BufferedOutputStream(toServer);
+			Writer toServerWriter = new OutputStreamWriter(toServer);
+			Scanner sc = new Scanner(System.in);
+			while (true) {
+				System.out.print("CLIENT >> ");
+				String msg = sc.nextLine();
+				if (msg.equals("종료")) {
+					toServerWriter.write(msg);
+					break;
+				}
+				else {
+					toServerWriter.write(msg);
+					toServerWriter.write('\n');
+					toServerWriter.flush();
+				}
+			}
+			toServer.close();
+			link.close();
+		} catch (IOException e) {
+			System.out.println(e);
+		}
+	}
+}

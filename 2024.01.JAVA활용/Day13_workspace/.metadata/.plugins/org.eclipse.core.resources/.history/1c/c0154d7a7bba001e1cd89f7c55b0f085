@@ -1,0 +1,33 @@
+package space3;
+
+import java.io.BufferedWriter;
+import java.io.OutputStreamWriter;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.util.Scanner;
+
+public class Client1 implements Runnable {
+	private InetAddress dest;
+	private int port;
+	public Client1(InetAddress dest, int port) {
+		this.dest = dest;
+		this.port = port;
+	}
+	public void run() {
+		try(Socket link = new Socket(dest, port)){
+			System.out.println("C1 - Connected!");
+			BufferedWriter bW =
+					new BufferedWriter(
+							new OutputStreamWriter(
+									link.getOutputStream()
+									)
+							);
+			Scanner sc = new Scanner(System.in);
+			while (true) {
+				System.out.println();
+			}
+		} catch(Exception e) {
+			System.out.println(e);
+		}
+	}
+}

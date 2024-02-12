@@ -1,0 +1,14 @@
+package space3;
+
+public class EX1 {
+	public static void main(String[] args) {
+		// ※ Socket은 통로만 만들어줌
+		// -> Socket을 쓸 수 있는 스트림을 만들어서 줌
+		// getInputStream();
+		// getOutputStream();
+		
+		try {
+			Thread client = new Thread(new SampleServer());
+		} catch (UnknownHostException e) {}
+	}
+}

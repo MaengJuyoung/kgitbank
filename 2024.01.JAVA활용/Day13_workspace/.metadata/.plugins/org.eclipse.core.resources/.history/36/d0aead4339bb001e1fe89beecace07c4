@@ -1,0 +1,12 @@
+package space4;
+
+import java.net.InetAddress;
+
+public class UDPClient implements Runnable {
+	private int port;			// 목적지개 개방한 port
+	private InetAddress dest;	// 
+	public UDPClient(InetAddress dest, int port) {
+		this.port = port;
+		this.dest = dest;
+	}
+}

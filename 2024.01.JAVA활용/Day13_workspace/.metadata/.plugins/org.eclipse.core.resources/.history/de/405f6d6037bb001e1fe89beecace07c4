@@ -1,0 +1,20 @@
+package space4;
+
+import java.net.DatagramSocket;
+import java.net.SocketException;
+
+public class UDPServer implements Runnable {
+	private int port; // 포트번호 - 전송된 것을 받을 경우, 이 번호와 일치하지 않으면 못받음
+	public UDPServer(int port) {
+		this.port = port;
+	}
+	public void run() {
+		try {
+			DatagramSocket entrance = new DatagramSocket(port);
+			// 
+		} catch (SocketException e) {
+			System.out.println(e);
+			System.out.println("포트번호가 사용중/중복임");
+		}
+	}
+}

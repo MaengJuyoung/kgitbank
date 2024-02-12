@@ -1,0 +1,25 @@
+package space3;
+
+import java.net.InetAddress;
+import java.net.Socket;
+
+public class Client1 implements Runnable {
+	private InetAddress dest;
+	private int port;
+	public Client1(InetAddress dest, int port) {
+		this.dest = dest;
+		this.port = port;
+	}
+	public void run() {
+		try(Socket link = new Socket(dest, port)){
+			BufferedWriter =
+					new BufferedWriter(
+							new OutputStreamWriter(
+									)
+							);
+			
+		} catch(Exception e) {
+			System.out.println(e);
+		}
+	}
+}

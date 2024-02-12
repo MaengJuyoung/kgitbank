@@ -1,0 +1,8 @@
+package runSpace;
+
+public class EX1 {
+	public static void main(String[] args) {
+		// 멀티 쓰레딩 - 프로그램 내에서의 다중작업
+		// - Thread 클래스를 상속하여 활용함
+	}
+}

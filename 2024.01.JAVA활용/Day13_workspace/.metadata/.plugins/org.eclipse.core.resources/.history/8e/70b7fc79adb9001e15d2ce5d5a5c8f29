@@ -1,0 +1,19 @@
+package space1;
+
+import java.util.Scanner;
+
+public class TEST1 {
+	public static void main(String[] args) {
+		// 실습
+		// - 입력된 주소를 토대로 InetAddress 객체를 생성해서
+		//   IP주소를 출력하는 프로그램을 만들어보세요.
+		// - 종료를 입력하면 더이상 입력받지 않고 종료됩니다.
+		// - UnknownHostException은 처리불가가 아니라, 못찾은 것을 의미하는
+		//   예외이니, "못찾았습니다." 라고 출력하도록 예외처리를 적용합니다.
+		Scanner sc = new Scanner(System.in);
+		while (true) {
+			System.out.print("인터넷 주소 입력 > ");
+			String address = 
+		}
+	}
+}

@@ -1,0 +1,25 @@
+package space1;
+
+class Location {
+	private int x;
+	private int y;
+	public Location(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+	public int getX() { return x; }
+	public int getY() { return y; }
+}
+interface SizeCompare {
+	boolean leftGreaterThanRight(Location left, Location Right);
+}
+
+public class TEST1 {
+	public static void main(String[] args) {
+		// 실습 - 2개의 SizeCompare 람다식을 생성하세요.
+		SizeCompare xStandard = ?????;	// x의 크기를 비교합니다. 왼쪽이 더 크면 참, 그 외에는 거짓
+		SizeCompare yStandard = ?????;	// y의 크기를 비교합니다. 왼쪽이 더 크면 참, 그 외에는 거짓
+		Location p1 = new Location(10, 1);
+		Location p2 = new Location(1, 10);
+	}
+}

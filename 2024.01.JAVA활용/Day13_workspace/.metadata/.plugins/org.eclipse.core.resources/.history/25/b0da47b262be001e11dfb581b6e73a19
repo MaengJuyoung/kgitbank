@@ -1,0 +1,12 @@
+package space1;
+
+public class TEST2 {
+	public static void main(String[] args) {
+		// Predicate<E> 인터페이스를 활용하세요.
+		// 1) 0보다 크면 true, 그 외엔 false가 나오는 gt0를 람다식으로 생성하세요.
+		//    Integer를 받아서 판별합니다.
+		// 2) 10보다 작으면 true, 그 외엔 false가 나오는 lt10을 람다식으로 생성하세요.
+		//    Integer를 받아서 판별합니다.
+		// 3) 
+	}
+}

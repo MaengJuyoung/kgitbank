@@ -1,0 +1,20 @@
+### 최초 설치 스크립트 - 한줄씩 복사하여 입력할 것! ###
+ALTER SESSION SET "_ORACLE_SCRIPT"=true;
+@?/demo/human_resources/hr_main.sql;
+1234
+users
+temp
+4321
+C:\app\USER\product\21c\dbhomeXE\demo\human_resources\
+localhost:1521
+
+### 위의 명령어 / 값들이 입력된 후에 입력하여 실행 ###
+@?/demo/human_resources/hr_cre.sql
+@?/demo/human_resources/hr_popul.sql
+@?/demo/human_resources/hr_idx.sql
+@?/demo/human_resources/hr_code.sql
+@?/demo/human_resources/hr_comnt.sql
+@?/demo/human_resources/hr_analz.sql
+
+### exit이후 다시 접속하여 마지막으로 실행 ###
+ALTER USER HR ACCOUNT UNLOCK INDENTIFIED BY 1234;

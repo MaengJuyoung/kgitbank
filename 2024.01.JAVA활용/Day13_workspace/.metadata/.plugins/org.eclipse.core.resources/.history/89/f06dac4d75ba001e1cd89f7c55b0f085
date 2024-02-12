@@ -1,0 +1,8 @@
+package space3;
+
+public class TEST1 {
+	public static void main(String[] args) {
+		// 실습
+		// 쓰레드 3개를 위한 클래스 3개를 준비하세요.
+	}
+}

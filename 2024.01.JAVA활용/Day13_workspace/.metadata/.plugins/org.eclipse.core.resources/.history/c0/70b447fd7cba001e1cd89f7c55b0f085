@@ -1,0 +1,22 @@
+package space3;
+
+import java.net.ServerSocket;
+import java.net.Socket;
+
+public class RelayServer implements Runnable {
+	private int port;
+	public RelayServer(int port) {
+		this.port = port;
+	}
+	public void run() {
+		try (ServerSocket listener = new ServerSocket(port)){
+			Socket fromC1 = listener.accept();
+			Socket toC2 = listener.accept();
+			// 1. Reader/Writer 둘다 준비해서
+			// 2. 
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
+}

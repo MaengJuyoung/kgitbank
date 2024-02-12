@@ -1,0 +1,28 @@
+package runSpace;
+
+public class TEST3 {
+	public static void main(String[] args) {
+		int[] arr = new int[5];
+		Thread inputThread = new Thread(
+				new Runnable() {
+					public void run() {
+						// 1) 
+					}
+				}
+				);
+		Thread outputThread = new Thread(
+				new Runnable() {
+					public void run() {
+						
+					}
+				}
+				);
+		try {
+			inputThread.start();
+			inputThread.join();
+			outputThread.start();
+		} catch(InterruptedException e) {
+			System.out.println(e);
+		}
+	}
+}

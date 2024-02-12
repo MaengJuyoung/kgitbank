@@ -1,0 +1,24 @@
+package space4;
+
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.SocketException;
+
+public class UDPClient implements Runnable {
+	private int port;			// 목적지가 개방한 port
+	private InetAddress dest;	// 목적지
+	public UDPClient(InetAddress dest, int port) {
+		this.port = port;
+		this.dest = dest;
+	}
+	public void run() {
+		try {
+			// 보내는 측은 포트를 미리 지정해서 개방하진 않음
+			DatagramSocket entrance = new DatagramSocket();
+			// 1) Buffer준비
+		} catch (SocketException e) {
+			System.out.println(e);
+			System.out.println("포트가 중복됨!");
+		}
+	}
+}

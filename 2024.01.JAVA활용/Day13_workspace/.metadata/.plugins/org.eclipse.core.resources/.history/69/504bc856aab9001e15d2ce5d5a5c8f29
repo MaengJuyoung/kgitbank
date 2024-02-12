@@ -1,0 +1,75 @@
+package space1;
+
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
+public class EX1 {
+	public static void sample() {
+		try {
+			// getAllByName - 도메인네임에 소속된 모든 컴퓨터의 호스트네임과  
+			InetAddress[] addrs = InetAddress.getAllByName("www.google.com");
+
+			for (int i = 0; i < addrs.length; i += 1) {
+				System.out.println(addrs[i].getHostName());
+				System.out.println(addrs[i].getHostAddress());
+			}
+		} catch (UnknownHostException e) {
+			System.out.println(e);
+		}
+	}
+	
+	public static void main(String[] args) {
+		sample();
+		// 네트워크를 통해 다른 컴퓨터와 통신을 하기 위해 필요한 것
+		// 1) 상대방 컴퓨터의 위치정보/이름
+		//    -> IP(Internet Protocol) Address를 통해서 찾아갈 수 있음
+		//    -> IP방식 통신에서 사용하는 주소체계
+		//    -> InetAdress 클래스가 이를 찾아줌
+		try {
+			// InetAddress 클래스
+			// - 네트워크상에서 지정한 대상의 정보를 관리하기 위한 클래스
+			// - 정적메서드로 객체를 생성하는 방식
+			
+			// 1) 도메인네임 - 외부와 연결시
+			//    - 대상컴퓨터의 주소를 문자열과 매칭시켜놓은 것
+			//    - Domain Name Server에 의하여 관리가 됨
+			InetAddress addr1 = InetAddress.getByName("www.naver.com");
+			
+			// 2) IP주소 - 내부와 연결시
+			//    - 네트워크에 연결된 컴퓨터가 부여받은 주소
+			//    - byte배열로 만들어서 넣어줘야 함
+			byte[] ipAddress = { (byte)1, (byte)1, (byte)1, (byte)1 }; // 정수 0 ~ 255까지 가능
+			InetAddress addr2 = InetAddress.getByAddress(ipAddress);
+			
+			// 3) LocalHost - 자기자신
+			//    - 자신과 통신이 필요할 때 준비하게 되는 주소
+			//    - 메서드에서 요구하는 것은 없음
+			InetAddress addr3 = InetAddress.getLocalHost();
+			
+			System.out.println(addr1.getHostName());
+			System.out.println(addr1.getHostAddress());
+			System.out.println(addr2.getHostName());
+			System.out.println(addr2.getHostAddress());
+			System.out.println(addr3.getHostName());
+			System.out.println(addr3.getHostAddress());
+			
+			// InetAddress의 기능 - 목적지에 도달 가능한지를 체크할 수 있음
+			// ※ isReachable()
+			// - 타임아웃시간을 설정해 도달 가능한지를 확인함
+			// - 지정시간이내(밀리세컨드단위)에 답이 오지 않으면 통신불가로 간주함
+			// - 원하는 시간 내에 도달이 불가능한 통신이면, 연결하지 않기 위해 사용이 가능함
+			System.out.println(addr1.isReachable(50));
+			System.out.println(addr2.isReachable(50));
+			
+			
+		} catch (UnknownHostException e) {
+			System.out.println(e);
+		} catch (IOException e) {
+			System.out.println(e);
+		}
+		
+		
+		// 2) 통신방식을 정해서 통신하는 것
+	}
+}

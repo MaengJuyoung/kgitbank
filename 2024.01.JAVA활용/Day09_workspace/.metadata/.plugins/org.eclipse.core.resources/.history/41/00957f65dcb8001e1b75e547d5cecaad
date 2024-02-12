@@ -1,0 +1,30 @@
+package runSpace;
+
+public class TEST3 {
+	public static void main(String[] args) {
+		int[] arr = new int[5];
+		Thread inputThread = new Thread(
+				new Runnable() {
+					public void run() {
+						// 1) 배열에 값을 입력을 받아 저장하는 코드를 작성하세요.
+						arr[0] = sc.nextInt();
+					}
+				}
+				);
+		Thread outputThread = new Thread(
+				new Runnable() {
+					public void run() {
+						// 2) 배열에 저장된 값을 출력하세요.
+						System.out.println(arr[0]);
+					}
+				}
+				);
+		try {
+			inputThread.start();
+			inputThread.join();
+			outputThread.start();
+		} catch(InterruptedException e) {
+			System.out.println(e);
+		}
+	}
+}

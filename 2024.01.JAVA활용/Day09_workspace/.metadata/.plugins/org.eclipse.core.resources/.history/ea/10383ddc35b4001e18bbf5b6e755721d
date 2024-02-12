@@ -1,0 +1,22 @@
+package fileStream;
+
+import java.io.IOException;
+
+public class EX6 {
+	public static void main(String[] args) {
+		// BufferedWriter/Reader : Reader/Writer에만 적용됨
+		// - 버퍼를 잘 쓰면 속도가 빨라짐
+		// - 중간에 프로그램이 강종되거나, 전원이 나가버리면 자료가 몽땅 손실됨
+		//   손실 방지를 위해 실시간으로 처리하기도 함
+		
+		// 이 클래스의 목적은 문자입출력에서 필요한 경우에 기능을 제공하기 위함
+		// -> 원본 스트림에는 기능이 추가가 되지 않음
+		try {
+			FileOutputStream fis = new FileOutputStream("OutputFolder/TESTFILE");
+			OutputStreamWriter osw = new OutputStreamWriter(fis, ) 
+			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter())
+		} catch(IOException e) {
+			
+		}
+	}
+}

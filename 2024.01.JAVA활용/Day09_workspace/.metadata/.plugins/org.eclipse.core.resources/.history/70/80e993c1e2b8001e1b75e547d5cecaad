@@ -1,0 +1,75 @@
+package newSpace;
+
+import java.util.Scanner;
+
+class InputThread implements Runnable {
+	// 동시작업을 하고자 하는 객체이자 필드이자 통제를 위한 객체
+	private Object lock;
+
+	public InputThread(Object lock) {
+		this.lock = lock;
+	}
+
+	public void run() {
+		Scanner sc = new Scanner(System.in);
+		// synchronized 블럭
+		// - 서로 다른 쓰레드가 서로 연동되어 동작하도록 하기 위한 구간
+		// - 먼저 실행된 쓰레드에서 "실행"을 선점할 수 있도록 해줌
+		//   -> 이를 "LOCK을 획득한 상태/획득했다" 등으로 표현함
+		//   -> 획득한 구간에서 할일을 다 끝냈으면 자동으로 LOCK이 풀림
+		//   -> 다른 쓰레드에서 경쟁적으로 먼저 선점을 시도하고, 획득하면 실행되는 방식을 취함
+		synchronized (lock) {
+			while (true) {
+				System.out.print("시작을 입력하세요 > ");
+				String word = sc.nextLine();
+				if (word.equals("시작"))
+					break;
+			}
+			lock.notify();
+			// lock.notifyAll();
+		}
+	}
+}
+
+class OutputThread implements Runnable {
+	private Object lock;
+	private String name;
+
+	public OutputThread(String name, Object lock) {
+		this.name = name;
+		this.lock = lock;
+	}
+
+	public void run() {
+		try {
+			synchronized (lock) {
+				// wait() 메서드
+				// - LOCK을 먼저 획득했을 경우, 이를 양보하고 대기상태로 진입하는 것
+				// - 조건문으로 이를 통제하여 양보를 구현함
+				lock.wait();
+				for (int i = 1; i < 10; i += 1) System.out.print(" " + i);
+			}
+		} catch (InterruptedException e) {
+			System.out.println(e);
+		}
+	}
+}
+
+public class EX1 {
+	public static void main(String[] args) {
+		// 쓰레드를 구성할 때...
+		// ※ 되도록 서로 영향을 주고받지 않는게 좋음(별도작업으로 구성하는게 좋음)
+
+		// 하지만...서로 다른 두 쓰레드가 동시에 작업을 하고 싶다
+		// ※ 동시에 하는 편이 유리한 상황도 존재하게 됨
+
+		// Lock : 동시작업을 하는 대상
+		// wait() : 해당 쓰레드를 일시정지시킴
+		// notify() : 다른 쓰레드를 진행시킴
+		Object lock = new Object();
+		Thread t1 = new Thread(new InputThread(lock));
+		Thread t2 = new Thread(new OutputThread("1번 쓰레드", lock));
+		t1.start();
+		t2.start();
+	}
+}
